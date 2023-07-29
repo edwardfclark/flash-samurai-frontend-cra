@@ -34,6 +34,7 @@ export function useAuth() {
 
   return {
     token,
+    isAuthenticated: !!token,
     login: (credentials: LoginCredentials) => loginMutation.mutate(credentials),
     logout,
   };
