@@ -1,6 +1,7 @@
 import Cookies from 'universal-cookie';
 import { useMutation } from '@tanstack/react-query';
 import { axiosClient } from '../services';
+import { enqueueSnackbar } from 'notistack';
 
 interface LoginCredentials {
   username: string;
@@ -16,9 +17,14 @@ export function useAuth() {
     onSuccess: (res) => {
       const { token } = res;
       cookies.set('token', token, { path: '/' });
-      console.log('success fired', res);
+      enqueueSnackbar('Login successful', { variant: 'success' });
+    },
+    onError: (err) => {
+      console.log(err);
+      enqueueSnackbar('Login failed', { variant: 'error' });
     },
   });
+
   return {
     token,
     login: (credentials: LoginCredentials) => loginMutation.mutate(credentials),
