@@ -1,18 +1,61 @@
-import { AppBar, Container, Toolbar, Box, IconButton, Typography } from '@mui/material';
-import { Menu, Logout } from '@mui/icons-material';
+import { AppBar, Container, Toolbar, Box, IconButton, Typography, Menu, MenuItem } from '@mui/material';
+import { useState } from 'react';
+import { Menu as MenuIcon, Logout } from '@mui/icons-material';
 import { useAuth } from '../../hooks';
+import { navItems } from './navItems';
 
 export function NavMenu() {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const { isAuthenticated, logout } = useAuth();
+
+  function handleNavMenuOpen(event: React.MouseEvent<HTMLElement>) {
+    setAnchorElNav(event.currentTarget);
+  }
+
+  function handleNavMenuClose() {
+    setAnchorElNav(null);
+  }
 
   if (!isAuthenticated) return null;
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <Menu />
-          </IconButton>
+          <Box>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="nav menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              sx={{ mr: 2 }}
+              onClick={handleNavMenuOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleNavMenuClose}
+            >
+              {navItems.map((item) => (
+                <MenuItem key={item.name} onClick={handleNavMenuClose}>
+                  <Typography textAlign="center">{item.name}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Flash Samurai
           </Typography>
