@@ -8,6 +8,7 @@ const queryClient = new QueryClient();
 
 function App() {
   const defaultTheme = createTheme();
+
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>

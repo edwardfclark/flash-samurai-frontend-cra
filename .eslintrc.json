@@ -2,9 +2,10 @@
   "extends": [
     "eslint:recommended",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
-  "plugins": ["prettier", "@typescript-eslint"],
+  "plugins": ["prettier", "@typescript-eslint", "@tanstack/query"],
   "rules": {
     "eqeqeq": "error",
     "no-console": "warn",
