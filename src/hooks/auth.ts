@@ -20,7 +20,6 @@ export function useAuth() {
       enqueueSnackbar('Login successful', { variant: 'success' });
     },
     onError: (err) => {
-      console.log(err);
       enqueueSnackbar('Login failed', { variant: 'error' });
     },
   });

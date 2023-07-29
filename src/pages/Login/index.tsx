@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Box, TextField, Button, Avatar, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAuth } from '../../hooks';
-import { redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export function Login() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const { token, login } = useAuth();
 
   // If the user is already logged in, redirect them to the home page.
-  // if (token) {
-  //   return redirect('/');
-  // }
+  if (token) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
