@@ -6,7 +6,7 @@ export function Root() {
   return (
     <>
       <NavMenu />
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ pt: '2rem' }}>
         <Outlet />
       </Container>
     </>
