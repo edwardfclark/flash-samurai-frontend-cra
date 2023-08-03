@@ -1,12 +1,12 @@
 export const navItems = [
   {
     name: 'Users',
-    permissions: ['admin'],
+    roles: ['admin'],
     path: '/users',
   },
   {
     name: 'Card Groups',
-    permissions: [],
+    roles: [],
     path: '/card-groups',
   },
 ];

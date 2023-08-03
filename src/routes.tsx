@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Root } from './pages/Root';
 import { Login } from './pages/Login';
+import { Groups } from './pages/Groups';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
     element: <Root />,
     children: [
       {
@@ -12,8 +12,8 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/groups',
-        element: <h1>Groups</h1>,
+        path: '/',
+        element: <Groups />,
       },
     ],
   },

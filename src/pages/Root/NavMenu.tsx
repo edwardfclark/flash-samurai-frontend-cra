@@ -1,12 +1,21 @@
 import { AppBar, Container, Toolbar, Box, IconButton, Typography, Menu, MenuItem } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu as MenuIcon, Logout } from '@mui/icons-material';
 import { useAuth } from '../../hooks';
 import { navItems } from './navItems';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function NavMenu() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const { isAuthenticated, logout } = useAuth();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated && pathname !== '/login') {
+      navigate('/login');
+    }
+  }, [isAuthenticated, pathname]);
 
   function handleNavMenuOpen(event: React.MouseEvent<HTMLElement>) {
     setAnchorElNav(event.currentTarget);
