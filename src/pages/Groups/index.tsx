@@ -1,12 +1,17 @@
 import { GridColDef, GridRowsProp, DataGrid } from '@mui/x-data-grid';
-import { Typography, IconButton } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useGetGroups, Group } from '../../hooks/Group/useGetGroups';
-import { MoreVert } from '@mui/icons-material';
 import { Actions } from './Actions';
+import { useState } from 'react';
 
 export function Groups() {
-  const { data: result } = useGetGroups({});
+  const [paginationModel, setPaginationModel] = useState({ page: 1, pageSize: 20 });
+  const { data: result, isLoading } = useGetGroups({
+    page: paginationModel.page,
+    limit: paginationModel.pageSize,
+  });
   const data = result?.data || [];
+  const total = result?.total || 0;
 
   const rows: GridRowsProp = data.map((group: Group) => ({
     id: group._id,
@@ -38,7 +43,16 @@ export function Groups() {
         Card groups are broad categories that are mutually exclusive. Groups can contain many cards, but a card can only
         belong to one group.
       </Typography>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        paginationMode="server"
+        rowCount={total}
+        loading={isLoading}
+        pageSizeOptions={[5, 10, 20, 50]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+      />
     </>
   );
 }
