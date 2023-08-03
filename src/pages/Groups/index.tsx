@@ -1,15 +1,35 @@
 import { GridColDef, GridRowsProp, DataGrid } from '@mui/x-data-grid';
-import { Typography } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
+import { useGetGroups, Group } from '../../hooks/Group/useGetGroups';
+import { MoreVert } from '@mui/icons-material';
+import { Actions } from './Actions';
 
 export function Groups() {
-  const rows: GridRowsProp = [
-    { id: 1, col1: 'Hello', col2: 'World' },
-    { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-    { id: 3, col1: 'MUI', col2: 'is Amazing' },
-  ];
+  const { data: result } = useGetGroups({});
+  const data = result?.data || [];
+
+  const rows: GridRowsProp = data.map((group: Group) => ({
+    id: group._id,
+    name: group.name,
+    description: group.description,
+    owner: group?.owner ?? '-',
+  }));
+
   const columns: GridColDef[] = [
-    { field: 'col1', headerName: 'Column 1', width: 150 },
-    { field: 'col2', headerName: 'Column 2', width: 150 },
+    { field: 'name', headerName: 'Name', maxWidth: 150, flex: 1, sortable: false, filterable: false },
+    { field: 'owner', headerName: 'Owner', maxWidth: 150, flex: 1, sortable: false, filterable: false },
+    { field: 'description', headerName: 'Description', flex: 1, sortable: false, filterable: false },
+    {
+      field: 'actions',
+      headerName: '',
+      maxWidth: 50,
+      flex: 1,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      disableReorder: true,
+      renderCell: ({ row }) => <Actions row={row} />,
+    },
   ];
   return (
     <>
