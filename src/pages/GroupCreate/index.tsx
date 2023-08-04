@@ -1,4 +1,4 @@
-import { Breadcrumbs } from '../../components';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Typography, TextField, Button, Stack, Box } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
