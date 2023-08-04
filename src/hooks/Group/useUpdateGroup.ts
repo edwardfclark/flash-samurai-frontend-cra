@@ -17,6 +17,7 @@ export function useUpdateGroup({ groupId }: { groupId?: string }) {
     onSuccess: () => {
       enqueueSnackbar('Group updated', { variant: 'success' });
       queryClient.invalidateQueries({ queryKey: ['groups'] });
+      queryClient.invalidateQueries({ queryKey: ['group', groupId] });
       navigate('/');
     },
     onError: () => {
