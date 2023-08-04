@@ -1,10 +1,13 @@
 import { GridColDef, GridRowsProp, DataGrid } from '@mui/x-data-grid';
-import { Typography } from '@mui/material';
+import { Typography, Button, Box } from '@mui/material';
+import { CreateNewFolder } from '@mui/icons-material';
 import { useGetGroups, Group } from '../../hooks/Group/useGetGroups';
 import { Actions } from './Actions';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Groups() {
+  const navigate = useNavigate();
   const [paginationModel, setPaginationModel] = useState({ page: 1, pageSize: 20 });
   const { data: result, isLoading } = useGetGroups({
     page: paginationModel.page,
@@ -27,13 +30,24 @@ export function Groups() {
     {
       field: 'actions',
       headerName: '',
-      maxWidth: 50,
+      maxWidth: 110,
       flex: 1,
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
       disableReorder: true,
       renderCell: ({ row }) => <Actions row={row} />,
+      renderHeader: () => (
+        <Box>
+          <Button
+            size="small"
+            endIcon={<CreateNewFolder fontSize="inherit" />}
+            onClick={() => navigate('/groups/create')}
+          >
+            Create
+          </Button>
+        </Box>
+      ),
     },
   ];
   return (
@@ -43,6 +57,7 @@ export function Groups() {
         Card groups are broad categories that are mutually exclusive. Groups can contain many cards, but a card can only
         belong to one group.
       </Typography>
+
       <DataGrid
         rows={rows}
         columns={columns}

@@ -1,5 +1,5 @@
 import { MoreVert } from '@mui/icons-material';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { IconButton, Menu, MenuItem, Box } from '@mui/material';
 import { useState } from 'react';
 
 interface ComponentProps {
@@ -30,7 +30,7 @@ export function Actions({ row }: ComponentProps) {
   }
 
   return (
-    <div>
+    <Box sx={{ display: 'flex', flexDirection: 'row-reverse', width: '100%' }}>
       <IconButton size="small" onClick={handleActionsOpen}>
         <MoreVert />
       </IconButton>
@@ -55,6 +55,6 @@ export function Actions({ row }: ComponentProps) {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+    </Box>
   );
 }
