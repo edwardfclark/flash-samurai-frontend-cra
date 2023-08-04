@@ -1,6 +1,7 @@
 import { MoreVert } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem, Box } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ComponentProps {
   row: {
@@ -11,15 +12,16 @@ interface ComponentProps {
   };
 }
 
-const options = [
-  { name: 'Edit', action: () => console.log('Edit!') },
-  { name: 'Delete', action: () => console.log('Delete!') },
-  { name: 'Tags', action: () => console.log('Tags!') },
-  { name: 'Cards', action: () => console.log('Cards!') },
-];
-
 export function Actions({ row }: ComponentProps) {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
+  const options = [
+    { name: 'Edit', action: () => navigate(`/groups/${row.id}/edit`) },
+    { name: 'Delete', action: () => console.log('Delete!') },
+    { name: 'Tags', action: () => navigate(`/groups/${row.id}/tags`) },
+    { name: 'Cards', action: () => navigate(`/groups/${row.id}/cards`) },
+  ];
 
   function handleActionsOpen(event: React.MouseEvent<HTMLElement>) {
     setAnchorElNav(event.currentTarget);

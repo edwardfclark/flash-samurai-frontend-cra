@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Root } from './pages/Root';
 import { Login } from './pages/Login';
 import { Groups } from './pages/Groups';
-import { CreateGroup } from './pages/CreateGroup';
+import { GroupCreate } from './pages/GroupCreate';
+import { GroupUpdate } from './pages/GroupUpdate';
 
 export const router = createBrowserRouter([
   {
@@ -18,11 +19,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/groups/create',
-        element: <CreateGroup />,
+        element: <GroupCreate />,
       },
       {
-        path: '/groups/:id/edit',
-        element: <p>Edit Group</p>,
+        path: '/groups/:groupId/edit',
+        element: <GroupUpdate />,
       },
     ],
   },

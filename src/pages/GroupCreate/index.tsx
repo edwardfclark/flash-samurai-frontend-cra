@@ -4,7 +4,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useCreateGroup, CreateGroupForm } from '../../hooks/Group/useCreateGroup';
 
-export function CreateGroup() {
+export function GroupCreate() {
   const { handleSubmit, control } = useForm<CreateGroupForm>();
   const { mutate, isLoading } = useCreateGroup();
   const onSubmit: SubmitHandler<CreateGroupForm> = (data: CreateGroupForm) => mutate(data);
