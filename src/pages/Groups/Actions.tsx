@@ -34,34 +34,32 @@ export function Actions({ row }: ComponentProps) {
   }
 
   return (
-    <div>
-      <Box sx={{ display: 'flex', flexDirection: 'row-reverse', width: '100%' }}>
-        <IconButton size="small" onClick={handleActionsOpen}>
-          <MoreVert />
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorElNav}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElNav)}
-          onClose={handleActionsClose}
-        >
-          {options.map((item) => (
-            <MenuItem key={item.name} onClick={item.action}>
-              {item.name}
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-      <DeleteGroup isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-    </div>
+    <Box sx={{ display: 'flex', flexDirection: 'row-reverse', width: '100%' }}>
+      <IconButton size="small" onClick={handleActionsOpen}>
+        <MoreVert />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElNav)}
+        onClose={handleActionsClose}
+      >
+        {options.map((item) => (
+          <MenuItem key={item.name} onClick={item.action}>
+            {item.name}
+          </MenuItem>
+        ))}
+      </Menu>
+      <DeleteGroup isOpen={modalOpen} onClose={() => setModalOpen(false)} groupId={row.id} />
+    </Box>
   );
 }
