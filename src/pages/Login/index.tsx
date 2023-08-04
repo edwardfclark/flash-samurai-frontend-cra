@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Avatar, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useAuth } from '../../hooks';
+import { useAuth } from '../../hooks/useAuth';
 import { Navigate } from 'react-router-dom';
 
 export function Login() {

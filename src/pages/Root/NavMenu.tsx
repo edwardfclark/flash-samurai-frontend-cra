@@ -1,7 +1,7 @@
 import { AppBar, Container, Toolbar, Box, IconButton, Typography, Menu, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Menu as MenuIcon, Logout } from '@mui/icons-material';
-import { useAuth } from '../../hooks';
+import { useAuth } from '../../hooks/useAuth';
 import { navItems } from './navItems';
 import { useLocation, useNavigate } from 'react-router-dom';
 

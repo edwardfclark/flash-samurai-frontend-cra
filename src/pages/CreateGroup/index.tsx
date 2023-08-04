@@ -1,11 +1,13 @@
 import { Breadcrumbs } from '../../components';
 import { Typography, TextField, Button, Stack, Box } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useCreateGroup, CreateGroupForm } from '../../hooks/Group/useCreateGroup';
 
 export function CreateGroup() {
-  const { handleSubmit, control, reset } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const { handleSubmit, control } = useForm<CreateGroupForm>();
+  const { mutate, isLoading } = useCreateGroup();
+  const onSubmit: SubmitHandler<CreateGroupForm> = (data: CreateGroupForm) => mutate(data);
   const navigate = useNavigate();
   return (
     <>
@@ -44,7 +46,7 @@ export function CreateGroup() {
             <Button variant="outlined" onClick={() => navigate('/')}>
               Cancel
             </Button>
-            <Button type="submit" variant="contained">
+            <Button type="submit" variant="contained" disabled={isLoading}>
               Submit
             </Button>
           </Box>
