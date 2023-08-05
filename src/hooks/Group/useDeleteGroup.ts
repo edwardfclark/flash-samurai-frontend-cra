@@ -9,9 +9,9 @@ export function useDeleteGroup({ groupId, successCallback }: { groupId?: string;
     mutationFn: () => axiosClient.delete(`/api/group/${groupId}`).then((res) => res.data),
     onSuccess: () => {
       enqueueSnackbar('Group deleted', { variant: 'success' });
-      successCallback?.();
       queryClient.invalidateQueries({ queryKey: ['groups'] });
       queryClient.invalidateQueries({ queryKey: ['group', groupId] });
+      successCallback?.();
     },
     onError: () => {
       enqueueSnackbar('Group deletion failed', { variant: 'error' });

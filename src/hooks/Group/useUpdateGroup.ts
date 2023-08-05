@@ -1,16 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosClient } from '../../services';
 import { enqueueSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
 
 export interface UpdateGroupForm {
   name: string;
   description?: string;
 }
 
-export function useUpdateGroup({ groupId }: { groupId?: string }) {
+export function useUpdateGroup({ groupId, successCallback }: { groupId?: string; successCallback?: () => void }) {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: (group: UpdateGroupForm) => axiosClient.put(`/api/group/${groupId}`, group).then((res) => res.data),
@@ -18,7 +16,7 @@ export function useUpdateGroup({ groupId }: { groupId?: string }) {
       enqueueSnackbar('Group updated', { variant: 'success' });
       queryClient.invalidateQueries({ queryKey: ['groups'] });
       queryClient.invalidateQueries({ queryKey: ['group', groupId] });
-      navigate('/');
+      successCallback?.();
     },
     onError: () => {
       enqueueSnackbar('Group update failed', { variant: 'error' });

@@ -5,9 +5,15 @@ import { UpdateGroupForm, useUpdateGroup } from '../../hooks/Group/useUpdateGrou
 
 export function GroupUpdateForm({ defaultValues, groupId }: { defaultValues: UpdateGroupForm; groupId?: string }) {
   const { handleSubmit, control } = useForm<UpdateGroupForm>({ defaultValues });
-  const { mutate, isLoading } = useUpdateGroup({ groupId });
-  const onSubmit: SubmitHandler<UpdateGroupForm> = (data: UpdateGroupForm) => mutate(data);
   const navigate = useNavigate();
+  const { mutate, isLoading } = useUpdateGroup({
+    groupId,
+    successCallback: () => {
+      navigate('/');
+    },
+  });
+
+  const onSubmit: SubmitHandler<UpdateGroupForm> = (data: UpdateGroupForm) => mutate(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
