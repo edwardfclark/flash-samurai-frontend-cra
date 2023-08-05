@@ -48,8 +48,10 @@ export function Tags() {
           { name: 'Tags', path: `/groups/${groupId}/tags` },
         ]}
       />
-      <Typography variant="h2" sx={{ margin: '0 0 2rem' }}>
-        {`${group?.name ?? 'Group'} Tags`}
+      <Typography variant="h2">{`${group?.name ?? 'Group'} Tags`}</Typography>
+      <Typography variant="subtitle1" sx={{ margin: '0 0 1rem' }}>
+        Tags are labels that can be applied to cards. A tag can belong to only one group, but a card can have multiple
+        tags.
       </Typography>
       {showLoading && (
         <Box
