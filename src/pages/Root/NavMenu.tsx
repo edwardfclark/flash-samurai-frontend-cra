@@ -59,7 +59,7 @@ export function NavMenu() {
               onClose={handleNavMenuClose}
             >
               {navItems.map((item) => (
-                <MenuItem key={item.name} onClick={handleNavMenuClose}>
+                <MenuItem key={item.name} onClick={() => navigate(item.path)}>
                   <Typography textAlign="center">{item.name}</Typography>
                 </MenuItem>
               ))}

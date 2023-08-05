@@ -7,6 +7,6 @@ export const navItems = [
   {
     name: 'Card Groups',
     roles: [],
-    path: '/card-groups',
+    path: '/',
   },
 ];
