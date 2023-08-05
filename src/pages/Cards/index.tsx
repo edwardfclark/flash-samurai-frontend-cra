@@ -8,6 +8,7 @@ import { useGetGroup } from '../../hooks/Group/useGetGroup';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { useGetCards } from '../../hooks/Card/useGetCards';
 import { ICard } from '../../types/Cards';
+import { Actions } from './Actions';
 
 export function Cards() {
   const navigate = useNavigate();
@@ -33,16 +34,16 @@ export function Cards() {
     { field: 'answer', headerName: 'Answer', flex: 1, sortable: false, filterable: false },
     { field: 'reference', headerName: 'Reference', flex: 1, sortable: false, filterable: false },
     { field: 'tags', headerName: 'Tags', flex: 1, sortable: false, filterable: false },
-    // {
-    //   field: 'actions',
-    //   headerName: '',
-    //   maxWidth: 50,
-    //   sortable: false,
-    //   filterable: false,
-    //   disableColumnMenu: true,
-    //   disableReorder: true,
-    //   renderCell: ({ row }) => <Actions row={row} />,
-    // },
+    {
+      field: 'actions',
+      headerName: '',
+      maxWidth: 50,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      disableReorder: true,
+      renderCell: ({ row }) => <Actions row={row} />,
+    },
   ];
 
   return (

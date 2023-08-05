@@ -9,6 +9,7 @@ import { TagCreate } from './pages/TagCreate';
 import { TagUpdate } from './pages/TagUpdate';
 import { Cards } from './pages/Cards';
 import { CardCreate } from './pages/CardCreate';
+import { CardUpdate } from './pages/CardUpdate';
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: '/groups/:groupId/cards/create',
         element: <CardCreate />,
+      },
+      {
+        path: '/groups/:groupId/cards/:cardId/edit',
+        element: <CardUpdate />,
       },
     ],
   },
