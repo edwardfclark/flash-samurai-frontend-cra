@@ -1,20 +1,18 @@
 import { TextField, Button, Stack, Box } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useUpdateGroup } from '../../hooks/Group/useUpdateGroup';
-import { GroupForm } from '../../types/Groups';
+import { IGroupForm } from '../../types/Groups';
 
-export function GroupUpdateForm({ defaultValues, groupId }: { defaultValues: GroupForm; groupId?: string }) {
-  const { handleSubmit, control } = useForm<GroupForm>({ defaultValues });
-  const navigate = useNavigate();
-  const { mutate, isLoading } = useUpdateGroup({
-    groupId,
-    successCallback: () => {
-      navigate('/');
-    },
-  });
+interface GroupFormProps {
+  defaultValues?: IGroupForm;
+  onCancel: () => void;
+  isLoading: boolean;
+  onSubmit: (data: IGroupForm) => void;
+}
 
-  const onSubmit: SubmitHandler<GroupForm> = (data: GroupForm) => mutate(data);
+export function GroupForm({ defaultValues, onCancel, isLoading, onSubmit: externalOnSubmit }: GroupFormProps) {
+  const { handleSubmit, control } = useForm<IGroupForm>({ defaultValues });
+
+  const onSubmit: SubmitHandler<IGroupForm> = (data: IGroupForm) => externalOnSubmit(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,7 +38,7 @@ export function GroupUpdateForm({ defaultValues, groupId }: { defaultValues: Gro
             justifyContent: 'flex-end',
           }}
         >
-          <Button variant="outlined" onClick={() => navigate('/')}>
+          <Button variant="outlined" onClick={onCancel}>
             Cancel
           </Button>
           <Button type="submit" variant="contained" disabled={isLoading}>

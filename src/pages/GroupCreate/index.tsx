@@ -1,19 +1,16 @@
 import { Breadcrumbs } from '../../components/Breadcrumbs';
-import { Typography, TextField, Button, Stack, Box } from '@mui/material';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useCreateGroup } from '../../hooks/Group/useCreateGroup';
-import { GroupForm } from '../../types/Groups';
+import { GroupForm } from '../../components/forms/GroupForm';
 
 export function GroupCreate() {
   const navigate = useNavigate();
-  const { handleSubmit, control } = useForm<GroupForm>();
   const { mutate, isLoading } = useCreateGroup({
     successCallback: () => {
       navigate('/');
     },
   });
-  const onSubmit: SubmitHandler<GroupForm> = (data: GroupForm) => mutate(data);
   return (
     <>
       <Breadcrumbs
@@ -25,38 +22,7 @@ export function GroupCreate() {
       <Typography variant="h2" sx={{ margin: '0 0 2rem' }}>
         Create Card Group
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack>
-          <Controller
-            name="name"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <TextField {...field} label="Name" sx={{ margin: '0 0 1rem' }} />}
-          />
-          <Controller
-            name="description"
-            control={control}
-            rules={{ required: false }}
-            render={({ field }) => (
-              <TextField {...field} label="Description" sx={{ margin: '0 0 1rem' }} multiline rows={3} />
-            )}
-          />
-          <Box
-            sx={{
-              display: 'flex',
-              gap: '1rem',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Button variant="outlined" onClick={() => navigate('/')}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="contained" disabled={isLoading}>
-              Submit
-            </Button>
-          </Box>
-        </Stack>
-      </form>
+      <GroupForm onSubmit={mutate} isLoading={isLoading} onCancel={() => navigate('/')} />
     </>
   );
 }
