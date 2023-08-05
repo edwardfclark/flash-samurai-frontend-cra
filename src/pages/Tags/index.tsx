@@ -7,6 +7,7 @@ import { useGetGroup } from '../../hooks/Group/useGetGroup';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { useGetTags } from '../../hooks/Tag/useGetTags';
 import { ITag } from '../../types/Tags';
+import { Actions } from './Actions';
 
 export function Tags() {
   const navigate = useNavigate();
@@ -21,22 +22,22 @@ export function Tags() {
   const rows: GridRowsProp = data.map((group: ITag) => ({
     id: group._id,
     name: group.name,
-    description: group.description,
+    description: group.description ?? '-',
   }));
 
   const columns: GridColDef[] = [
     { field: 'name', headerName: 'Name', maxWidth: 150, flex: 1, sortable: false, filterable: false },
     { field: 'description', headerName: 'Description', flex: 1, sortable: false, filterable: false },
-    // {
-    //   field: 'actions',
-    //   headerName: '',
-    //   maxWidth: 50,
-    //   sortable: false,
-    //   filterable: false,
-    //   disableColumnMenu: true,
-    //   disableReorder: true,
-    //   renderCell: ({ row }) => <Actions row={row} />,
-    // },
+    {
+      field: 'actions',
+      headerName: '',
+      maxWidth: 50,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      disableReorder: true,
+      renderCell: ({ row }) => <Actions row={row} />,
+    },
   ];
 
   return (
