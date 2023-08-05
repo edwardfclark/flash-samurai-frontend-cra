@@ -43,6 +43,7 @@ export function Groups() {
       renderCell: ({ row }) => <Actions row={row} />,
     },
   ];
+
   return (
     <>
       <Typography variant="h2">Card Groups</Typography>
