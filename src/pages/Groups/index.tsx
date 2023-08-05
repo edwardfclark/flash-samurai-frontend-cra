@@ -1,14 +1,15 @@
 import { GridColDef, GridRowsProp, DataGrid } from '@mui/x-data-grid';
 import { Typography, Button, Box, CircularProgress } from '@mui/material';
 import { CreateNewFolder } from '@mui/icons-material';
-import { useGetGroups, Group } from '../../hooks/Group/useGetGroups';
+import { useGetGroups } from '../../hooks/Group/useGetGroups';
 import { Actions } from './Actions';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IGroup } from '../../types/Groups';
 
 export function Groups() {
   const navigate = useNavigate();
-  const [paginationModel, setPaginationModel] = useState({ page: 1, pageSize: 20 });
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 20 });
   const {
     data: result,
     isLoading,
@@ -21,7 +22,7 @@ export function Groups() {
   const data = result?.data || [];
   const total = result?.total || 0;
 
-  const rows: GridRowsProp = data.map((group: Group) => ({
+  const rows: GridRowsProp = data.map((group: IGroup) => ({
     id: group._id,
     name: group.name,
     description: group.description,

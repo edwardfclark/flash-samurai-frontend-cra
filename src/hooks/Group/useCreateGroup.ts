@@ -7,7 +7,7 @@ export function useCreateGroup({ successCallback }: { successCallback?: () => vo
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (group: IGroupForm) => axiosClient.post('/api/group', group).then((res) => res.data),
+    mutationFn: (body: IGroupForm) => axiosClient.post('/api/group', body).then((res) => res.data),
     onSuccess: () => {
       enqueueSnackbar('Group created', { variant: 'success' });
       queryClient.invalidateQueries({ queryKey: ['groups'] });
