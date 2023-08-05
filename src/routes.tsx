@@ -7,6 +7,8 @@ import { GroupUpdate } from './pages/GroupUpdate';
 import { Tags } from './pages/Tags';
 import { TagCreate } from './pages/TagCreate';
 import { TagUpdate } from './pages/TagUpdate';
+import { Cards } from './pages/Cards';
+import { CardCreate } from './pages/CardCreate';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ export const router = createBrowserRouter([
       {
         path: '/groups/:groupId/tags/:tagId/edit',
         element: <TagUpdate />,
+      },
+      {
+        path: '/groups/:groupId/cards',
+        element: <Cards />,
+      },
+      {
+        path: '/groups/:groupId/cards/create',
+        element: <CardCreate />,
       },
     ],
   },

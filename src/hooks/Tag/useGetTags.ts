@@ -4,6 +4,6 @@ import { axiosClient } from '../../services';
 export function useGetTags({ groupId }: { groupId?: string }) {
   return useQuery({
     queryKey: ['tags', groupId],
-    queryFn: () => axiosClient.get(`/api/group/${groupId}/tags`, { params: { groupId } }).then((res) => res.data),
+    queryFn: () => axiosClient.get(`/api/group/${groupId}/tags`).then((res) => res.data),
   });
 }
