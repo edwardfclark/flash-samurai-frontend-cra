@@ -2,18 +2,18 @@ import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Typography, TextField, Button, Stack, Box } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useCreateGroup, CreateGroupForm } from '../../hooks/Group/useCreateGroup';
+import { useCreateGroup } from '../../hooks/Group/useCreateGroup';
+import { GroupForm } from '../../types/Groups';
 
 export function GroupCreate() {
   const navigate = useNavigate();
-
-  const { handleSubmit, control } = useForm<CreateGroupForm>();
+  const { handleSubmit, control } = useForm<GroupForm>();
   const { mutate, isLoading } = useCreateGroup({
     successCallback: () => {
       navigate('/');
     },
   });
-  const onSubmit: SubmitHandler<CreateGroupForm> = (data: CreateGroupForm) => mutate(data);
+  const onSubmit: SubmitHandler<GroupForm> = (data: GroupForm) => mutate(data);
   return (
     <>
       <Breadcrumbs

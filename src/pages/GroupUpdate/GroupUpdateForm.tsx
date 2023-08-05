@@ -1,10 +1,11 @@
 import { TextField, Button, Stack, Box } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { UpdateGroupForm, useUpdateGroup } from '../../hooks/Group/useUpdateGroup';
+import { useUpdateGroup } from '../../hooks/Group/useUpdateGroup';
+import { GroupForm } from '../../types/Groups';
 
-export function GroupUpdateForm({ defaultValues, groupId }: { defaultValues: UpdateGroupForm; groupId?: string }) {
-  const { handleSubmit, control } = useForm<UpdateGroupForm>({ defaultValues });
+export function GroupUpdateForm({ defaultValues, groupId }: { defaultValues: GroupForm; groupId?: string }) {
+  const { handleSubmit, control } = useForm<GroupForm>({ defaultValues });
   const navigate = useNavigate();
   const { mutate, isLoading } = useUpdateGroup({
     groupId,
@@ -13,7 +14,7 @@ export function GroupUpdateForm({ defaultValues, groupId }: { defaultValues: Upd
     },
   });
 
-  const onSubmit: SubmitHandler<UpdateGroupForm> = (data: UpdateGroupForm) => mutate(data);
+  const onSubmit: SubmitHandler<GroupForm> = (data: GroupForm) => mutate(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
