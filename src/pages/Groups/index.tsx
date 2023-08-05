@@ -35,30 +35,18 @@ export function Groups() {
     {
       field: 'actions',
       headerName: '',
-      maxWidth: 110,
-      flex: 1,
+      maxWidth: 50,
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
       disableReorder: true,
       renderCell: ({ row }) => <Actions row={row} />,
-      renderHeader: () => (
-        <Box>
-          <Button
-            size="small"
-            endIcon={<CreateNewFolder fontSize="inherit" />}
-            onClick={() => navigate('/groups/create')}
-          >
-            Create
-          </Button>
-        </Box>
-      ),
     },
   ];
   return (
     <>
       <Typography variant="h2">Card Groups</Typography>
-      <Typography variant="subtitle1" sx={{ margin: '0 0 2rem' }}>
+      <Typography variant="subtitle1" sx={{ margin: '0 0 1rem' }}>
         Card groups are broad categories that are mutually exclusive. Groups can contain many cards, but a card can only
         belong to one group.
       </Typography>
@@ -76,16 +64,35 @@ export function Groups() {
         </Box>
       )}
       {!showLoading && (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          paginationMode="server"
-          rowCount={total}
-          loading={isLoading}
-          pageSizeOptions={[5, 10, 20, 50]}
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
-        />
+        <>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              mb: '0.5rem',
+            }}
+          >
+            <Button
+              size="small"
+              variant="contained"
+              endIcon={<CreateNewFolder />}
+              onClick={() => navigate('/groups/create')}
+            >
+              Create
+            </Button>
+          </Box>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            paginationMode="server"
+            rowCount={total}
+            loading={isLoading}
+            pageSizeOptions={[5, 10, 20, 50]}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+          />
+        </>
       )}
     </>
   );
