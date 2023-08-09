@@ -16,7 +16,11 @@ export function Cards() {
   const params = useParams();
   const groupId = params?.groupId;
   const { data: group } = useGetGroup({ groupId });
-  const { data: result, isLoading, isFetching } = useGetCards({ groupId });
+  const {
+    data: result,
+    isLoading,
+    isFetching,
+  } = useGetCards({ groupId, page: paginationModel.page, limit: paginationModel.pageSize });
   const showLoading = isLoading || isFetching;
   const data = result?.data || [];
   const total = result?.total || 0;
@@ -100,6 +104,7 @@ export function Cards() {
             pageSizeOptions={[5, 10, 20, 50]}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
+            disableRowSelectionOnClick
           />
         </>
       )}

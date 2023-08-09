@@ -93,6 +93,7 @@ export function Groups() {
             pageSizeOptions={[5, 10, 20, 50]}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
+            disableRowSelectionOnClick
           />
         </>
       )}

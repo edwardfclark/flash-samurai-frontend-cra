@@ -85,7 +85,14 @@ export function Tags() {
               Create
             </Button>
           </Box>
-          <DataGrid rows={rows} columns={columns} paginationMode="server" rowCount={total} loading={isLoading} />
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            paginationMode="server"
+            rowCount={total}
+            loading={isLoading}
+            disableRowSelectionOnClick
+          />
         </>
       )}
     </>
