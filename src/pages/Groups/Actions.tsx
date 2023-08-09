@@ -24,6 +24,7 @@ export function Actions({ row }: ComponentProps) {
           { name: 'Delete', action: () => setModalOpen(true) },
           { name: 'Tags', action: () => navigate(`/groups/${row.id}/tags`) },
           { name: 'Cards', action: () => navigate(`/groups/${row.id}/cards`) },
+          { name: 'Quiz', action: () => navigate(`/groups/${row.id}/quiz`) },
         ]}
       />
       <DeleteGroup isOpen={modalOpen} onClose={() => setModalOpen(false)} groupId={row.id} />

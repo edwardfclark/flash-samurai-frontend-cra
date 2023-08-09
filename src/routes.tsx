@@ -4,6 +4,7 @@ import { Login } from './pages/Login';
 import { Groups } from './pages/Groups';
 import { GroupCreate } from './pages/GroupCreate';
 import { GroupUpdate } from './pages/GroupUpdate';
+import { GroupQuiz } from './pages/GroupQuiz';
 import { Tags } from './pages/Tags';
 import { TagCreate } from './pages/TagCreate';
 import { TagUpdate } from './pages/TagUpdate';
@@ -30,6 +31,11 @@ export const router = createBrowserRouter([
       {
         path: '/groups/:groupId/edit',
         element: <GroupUpdate />,
+      },
+
+      {
+        path: '/groups/:groupId/quiz',
+        element: <GroupQuiz />,
       },
       {
         path: '/groups/:groupId/tags',
