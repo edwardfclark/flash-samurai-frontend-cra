@@ -1,4 +1,4 @@
-import { Typography, CardActions, Button, Box, Chip } from '@mui/material';
+import { Typography, CardActions, Button, Box, Chip, Tooltip } from '@mui/material';
 import { ICard } from '../../types/Cards';
 
 interface ComponentProps {
@@ -13,7 +13,9 @@ export function FetchedCard({ fetchedCard, isAnswerRevealed, setIsAnswerRevealed
       {!!fetchedCard?.tags?.length && fetchedCard?.tags?.length > 0 && (
         <Box sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem', display: 'flex', gap: '0.25rem' }}>
           {fetchedCard.tags.map((tag) => (
-            <Chip label={tag.name} size="small" />
+            <Tooltip title={tag?.description} arrow>
+              <Chip label={tag.name} size="small" />
+            </Tooltip>
           ))}
         </Box>
       )}
