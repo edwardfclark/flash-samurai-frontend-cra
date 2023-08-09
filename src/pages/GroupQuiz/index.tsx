@@ -19,6 +19,7 @@ export function GroupQuiz() {
   const [tagNames, setTagNames] = useState<string[]>([]);
   const { mutate, isLoading } = useGenerateQuizCard({
     groupId,
+    tagNames,
     successCallback: (card) => {
       setFetchedCard(card?.data);
       setIsAnswerRevealed(false);
