@@ -2,8 +2,7 @@ import { GridColDef, GridRowsProp, DataGrid } from '@mui/x-data-grid';
 import { Typography, Button, Box, CircularProgress } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useGetGroup } from '../../hooks/Group/useGetGroup';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { useGetCards } from '../../hooks/Card/useGetCards';
@@ -12,7 +11,13 @@ import { Actions } from './Actions';
 
 export function Cards() {
   const navigate = useNavigate();
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 20 });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamsPage = searchParams?.get('page');
+  const searchParamsLimit = searchParams?.get('limit');
+  const [paginationModel, setPaginationModel] = useState({
+    page: (searchParamsPage as unknown as number) ?? 0,
+    pageSize: (searchParamsLimit as unknown as number) ?? 20,
+  });
   const params = useParams();
   const groupId = params?.groupId;
   const { data: group } = useGetGroup({ groupId });
@@ -20,7 +25,11 @@ export function Cards() {
     data: result,
     isLoading,
     isFetching,
-  } = useGetCards({ groupId, page: paginationModel.page, limit: paginationModel.pageSize });
+  } = useGetCards({
+    groupId,
+    page: paginationModel.page as unknown as string,
+    limit: paginationModel.pageSize as unknown as string,
+  });
   const showLoading = isLoading || isFetching;
   const data = result?.data || [];
   const total = result?.total || 0;
@@ -103,7 +112,11 @@ export function Cards() {
             loading={isLoading}
             pageSizeOptions={[5, 10, 20, 50]}
             paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
+            onPaginationModelChange={(model) => {
+              const { page, pageSize } = model;
+              setSearchParams({ page: page as unknown as string, limit: pageSize as unknown as string });
+              setPaginationModel(model);
+            }}
             disableRowSelectionOnClick
           />
         </>
