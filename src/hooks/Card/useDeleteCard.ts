@@ -6,10 +6,14 @@ export function useDeleteCard({
   groupId,
   successCallback,
   cardId,
+  page,
+  limit,
 }: {
   cardId?: string;
   successCallback?: () => void;
   groupId?: string;
+  page?: string;
+  limit?: string;
 }) {
   const queryClient = useQueryClient();
 
@@ -17,7 +21,7 @@ export function useDeleteCard({
     mutationFn: () => axiosClient.delete(`/api/card/${cardId}`).then((res) => res.data),
     onSuccess: () => {
       enqueueSnackbar('Card deleted', { variant: 'success' });
-      queryClient.invalidateQueries({ queryKey: ['cards', groupId] });
+      queryClient.invalidateQueries({ queryKey: ['cards', { groupId, page, limit }] });
       successCallback?.();
     },
     onError: () => {

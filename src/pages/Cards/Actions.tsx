@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { RowActionsMenu } from '../../components/RowActionsMenu';
 import { DeleteCard } from './DeleteCard';
 
@@ -17,6 +17,9 @@ export function Actions({ row }: ComponentProps) {
   const params = useParams();
   const groupId = params?.groupId;
   const [modalOpen, setModalOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const searchParamsPage = searchParams?.get('page');
+  const searchParamsLimit = searchParams?.get('limit');
 
   return (
     <div>
@@ -26,7 +29,14 @@ export function Actions({ row }: ComponentProps) {
           { name: 'Delete', action: () => setModalOpen(true) },
         ]}
       />
-      <DeleteCard isOpen={modalOpen} onClose={() => setModalOpen(false)} cardId={row.id} groupId={groupId} />
+      <DeleteCard
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        cardId={row.id}
+        groupId={groupId}
+        page={searchParamsPage || '0'}
+        limit={searchParamsLimit || '20'}
+      />
     </div>
   );
 }

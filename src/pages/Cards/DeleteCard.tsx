@@ -6,10 +6,12 @@ interface ComponentProps {
   onClose: () => void;
   groupId?: string;
   cardId: string;
+  page?: string;
+  limit?: string;
 }
 
-export function DeleteCard({ isOpen, onClose, groupId, cardId }: ComponentProps) {
-  const { mutate, isLoading } = useDeleteCard({ groupId, successCallback: onClose, cardId });
+export function DeleteCard({ isOpen, onClose, groupId, cardId, page, limit }: ComponentProps) {
+  const { mutate, isLoading } = useDeleteCard({ groupId, successCallback: onClose, cardId, page, limit });
   return (
     <ConfirmationDialog
       isOpen={isOpen}

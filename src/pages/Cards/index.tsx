@@ -86,7 +86,7 @@ export function Cards() {
         </Box>
       )}
       {!showLoading && (
-        <>
+        <Box sx={{ mb: '2rem' }}>
           <Box
             sx={{
               width: '100%',
@@ -95,12 +95,7 @@ export function Cards() {
               mb: '0.5rem',
             }}
           >
-            <Button
-              size="small"
-              variant="contained"
-              endIcon={<Add />}
-              onClick={() => navigate(`/groups/${groupId}/cards/create`)}
-            >
+            <Button variant="contained" endIcon={<Add />} onClick={() => navigate(`/groups/${groupId}/cards/create`)}>
               Create
             </Button>
           </Box>
@@ -119,7 +114,7 @@ export function Cards() {
             }}
             disableRowSelectionOnClick
           />
-        </>
+        </Box>
       )}
     </>
   );
