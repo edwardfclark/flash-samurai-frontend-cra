@@ -9,7 +9,11 @@ import { SnackbarProvider } from 'notistack';
 const queryClient = new QueryClient();
 
 function App() {
-  const defaultTheme = createTheme();
+  const defaultTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
   return (
     <React.StrictMode>
