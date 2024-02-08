@@ -15,15 +15,12 @@ import { Menu as MenuIcon, Logout } from '@mui/icons-material';
 import { useAuth } from '../../hooks/useAuth';
 import { navItems } from './navItems';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useLocalStorage } from 'react-use';
-import { DARK_MODE_STORAGE_KEY } from '../../utils/constants';
 
 export function NavMenu() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const { isAuthenticated, logout } = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useLocalStorage(DARK_MODE_STORAGE_KEY, 'false');
 
   useEffect(() => {
     if (!isAuthenticated && pathname !== '/login') {
@@ -78,12 +75,7 @@ export function NavMenu() {
                 </MenuItem>
               ))}
               <FormControlLabel
-                control={
-                  <Switch
-                    checked={darkMode === 'true'}
-                    onChange={() => setDarkMode(darkMode === 'true' ? 'false' : 'true')}
-                  />
-                }
+                control={<Switch checked={false} onChange={() => console.log('toggle')} />}
                 label="Dark Mode"
                 labelPlacement="start"
                 sx={{ pr: 2 }}
