@@ -12,11 +12,14 @@ import {
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Menu as MenuIcon, Logout } from '@mui/icons-material';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useLocalStorageState from 'use-local-storage-state';
 import { useAuth } from '../../hooks/useAuth';
 import { navItems } from './navItems';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { THEME_PALETTE_KEY } from '../../utils/constants';
 
 export function NavMenu() {
+  const [themePalette, setThemePalette] = useLocalStorageState(THEME_PALETTE_KEY, { defaultValue: 'light' });
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const { isAuthenticated, logout } = useAuth();
   const { pathname } = useLocation();
@@ -75,7 +78,12 @@ export function NavMenu() {
                 </MenuItem>
               ))}
               <FormControlLabel
-                control={<Switch checked={false} onChange={() => console.log('toggle')} />}
+                control={
+                  <Switch
+                    checked={themePalette === 'dark'}
+                    onChange={() => (themePalette === 'dark' ? setThemePalette('light') : setThemePalette('dark'))}
+                  />
+                }
                 label="Dark Mode"
                 labelPlacement="start"
                 sx={{ pr: 2 }}
