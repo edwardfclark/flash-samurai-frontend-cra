@@ -10,15 +10,6 @@ interface ComponentProps {
 export function FetchedCard({ fetchedCard, isAnswerRevealed, setIsAnswerRevealed }: ComponentProps) {
   return (
     <>
-      {!!fetchedCard?.tags?.length && fetchedCard?.tags?.length > 0 && (
-        <Box sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem', display: 'flex', gap: '0.25rem' }}>
-          {fetchedCard.tags.map((tag) => (
-            <Tooltip title={tag?.description} arrow>
-              <Chip label={tag.name} size="small" />
-            </Tooltip>
-          ))}
-        </Box>
-      )}
       <Typography variant="h5" sx={{ margin: '0 0 1rem' }}>
         Question:
       </Typography>
@@ -40,6 +31,15 @@ export function FetchedCard({ fetchedCard, isAnswerRevealed, setIsAnswerRevealed
           </Typography>
           {!!fetchedCard?.reference && <Typography variant="caption">{fetchedCard.reference}</Typography>}
         </>
+      )}
+      {!!fetchedCard?.tags?.length && fetchedCard?.tags?.length > 0 && (
+        <Box sx={{ position: 'absolute', bottom: '0.5rem', right: '0.5rem', display: 'flex', gap: '0.25rem' }}>
+          {fetchedCard.tags.map((tag) => (
+            <Tooltip title={tag?.description} arrow>
+              <Chip label={tag.name} size="small" />
+            </Tooltip>
+          ))}
+        </Box>
       )}
     </>
   );
