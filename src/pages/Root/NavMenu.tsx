@@ -85,9 +85,8 @@ export function NavMenu() {
                   />
                 }
                 label="Dark Mode"
-                sx={{
-                  px: 2,
-                }}
+                labelPlacement="start"
+                sx={{ pr: 2 }}
               />
             </Menu>
           </Box>
