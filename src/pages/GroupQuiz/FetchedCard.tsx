@@ -22,7 +22,7 @@ export function FetchedCard({ fetchedCard, isAnswerRevealed, setIsAnswerRevealed
       <Typography variant="h5" sx={{ margin: '0 0 1rem' }}>
         Question:
       </Typography>
-      <Typography variant="body1" sx={{ margin: '0 0 1rem' }}>
+      <Typography variant="body1" sx={{ margin: '0 0 1rem', whiteSpace: 'pre-line' }}>
         {fetchedCard.question}
       </Typography>
       {!isAnswerRevealed && (
@@ -35,7 +35,7 @@ export function FetchedCard({ fetchedCard, isAnswerRevealed, setIsAnswerRevealed
           <Typography variant="h5" sx={{ margin: '0 0 1rem' }}>
             Answer:
           </Typography>
-          <Typography variant="body1" sx={{ margin: '0 0 1rem' }}>
+          <Typography variant="body1" sx={{ margin: '0 0 1rem', whiteSpace: 'pre-line' }}>
             {fetchedCard.answer}
           </Typography>
           {!!fetchedCard?.reference && <Typography variant="caption">{fetchedCard.reference}</Typography>}
